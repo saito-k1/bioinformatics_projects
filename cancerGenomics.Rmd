@@ -1,9 +1,17 @@
 ---
 title: "Cancer Genomics Tutorial"
-output: html_notebook
+output:
+  html_document:
+    toc: true
+    toc_depth: 4
+    toc_float: true
+    dev: 'svg'
+  md_document:
+    variant: gfm
+date: '2022-04-25'
 ---
 
-SECTION 6
+SECTION 6: Reading and Summarizing MAF Files
 
 The input files for reading/summarizing MAF files are a MAF file (can be gz compressed), an optional clinical data associated with each sample, and an optional copy number data file. In this section, we read the MAF file and viewed the sample summary, the gene summary, the clinical data, and the fields. 
 
@@ -26,7 +34,7 @@ getFields(laml)
 write.mafSummary(maf = laml, basename = 'laml')
 ```
 
-SECTION 7
+SECTION 7: Visualization
 
 In this section, we visualized the MAF data in various different ways. In 7.1, we first plotted the MAF summary: the number of variants in each sample is represented as a stacked bar plot and the variant types are represented by the box plot. Additionally, in 7.2, we drew oncoplots, or waterfall plots, which are a better representation of a maf file. In this oncoplot, we can see the frequency of mutations in the genes. We then classified SNPs into transitions and transversions in 7.3 using the titv function and ploted the summarized data as a boxplot showing overall distribution of six different conversions and as a stacked barplot showing fraction of conversions in each sample. 
 
@@ -83,7 +91,7 @@ gisticOncoPlot(gistic = laml.gistic, clinicalData = getClinicalData(x = laml), c
 
 ```
 
-SECTION 9
+SECTION 9: Analysis
 
 In section 9.1, we observed the somatic interactions  between genes: we detected the mutually exclusive/co-occuring sets of genes by utilizing the somaticInteractions function. This function performs pair-wise Fisher's Exact test to detect significant pairs of genes. In section 9.2, we detected cancer driver genes based on positional clustering through the oncodrive function and plotted the results. In section 9.3, we added and summarized pfam domain information to the amino acid changes. This function also summarizes amino acid changes according to the domains that were affected in order to determine what domain in cancer is most frequently affected.  In section 9.4, we performed survival analysis and drew Kaplan Meier curves by grouping samples based on mutation status of genes. First, in 9.4.1, we identified the number of mutated samples for the given genes and plotted the survival probability. Then, in 9.4.2, we predicted the genesets associated with survival. In section 9.5, we compared two cohorts to detect differentially mutated genes between patients who have initial APL and relapsed APL. In 9.5.1, we visualized the difference between two genes, PML and RARA, between Primary APL and Relapse APL patient using a forest plot. In 9.5.2, we utilized an alternative method of displaying these results by plotting two oncoplots side by side. Additionally, we created co-bar plots of the genes in 9.5.3 and lollipop plots in 9.5.4 to show gene-wise differences. 
 
