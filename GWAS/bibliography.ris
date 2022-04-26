@@ -1,0 +1,86 @@
+TY  - JOUR
+ID  - Purcell
+DB  - PubMed
+AU  - Purcell, Shaun
+AU  - Neale, Benjamin
+AU  - Todd-Brown, Kathe
+AU  - Thomas, Lori
+AU  - Ferreira, Manuel A R
+AU  - Bender, David
+AU  - Maller, Julian
+AU  - Sklar, Pamela
+AU  - de Bakker, Paul I W
+AU  - Daly, Mark J
+AU  - Sham, Pak C
+T1  - PLINK: a tool set for whole-genome association and population-based linkage analyses
+LA  - eng
+SN  - 0002-9297
+SN  - 1537-6605
+Y1  - 2007/09/
+ET  - 2007/07/25
+AB  - Whole-genome association studies (WGAS) bring new computational, as well as analytic, challenges to researchers. Many existing genetic-analysis tools are not designed to handle such large data sets in a convenient manner and do not necessarily exploit the new opportunities that whole-genome data bring. To address these issues, we developed PLINK, an open-source C/C++ WGAS tool set. With PLINK, large data sets comprising hundreds of thousands of markers genotyped for thousands of individuals can be rapidly manipulated and analyzed in their entirety. As well as providing tools to make the basic analytic steps computationally efficient, PLINK also supports some novel approaches to whole-genome data that take advantage of whole-genome coverage. We introduce PLINK and describe the five main domains of function: data management, summary statistics, population stratification, association analysis, and identity-by-descent estimation. In particular, we focus on the estimation and use of identity-by-state and identity-by-descent information in the context of population-based whole-genome studies. This information can be used to detect and correct for population stratification and to identify extended chromosomal segments that are shared identical by descent between very distantly related individuals. Analysis of the patterns of segmental sharing has the potential to map disease loci that contain multiple rare variants in a population-based linkage analysis.
+SP  - 559
+EP  - 575
+VL  - 81
+IS  - 3
+AN  - 17701901
+UR  - https://pubmed.ncbi.nlm.nih.gov/17701901
+DO  - 10.1086/519795
+L2  - https://www.ncbi.nlm.nih.gov/pmc/articles/PMC1950838/
+U1  - 17701901[pmid]
+U2  - PMC1950838[pmcid]
+U4  - S0002-9297(07)61352-4[PII]
+J2  - Am J Hum Genet
+JF  - American journal of human genetics
+KW  - Genetic Linkage/*genetics
+KW  - Genome, Human/*genetics
+KW  - Humans
+KW  - Polymorphism, Single Nucleotide
+KW  - Population/*genetics
+KW  - *Software
+PB  - The American Society of Human Genetics
+ER  - 
+TY  - JOUR
+ID  - Marees
+DB  - PubMed
+AU  - Marees, Andries T
+AU  - de Kluiver, Hilde
+AU  - Stringer, Sven
+AU  - Vorspan, Florence
+AU  - Curis, Emmanuel
+AU  - Marie-Claire, Cynthia
+AU  - Derks, Eske M
+T1  - A tutorial on conducting genome-wide association studies: Quality control and statistical analysis
+LA  - eng
+SN  - 1557-0657
+SN  - 1049-8931
+Y1  - 2018/06/
+ET  - 2018/02/27
+AB  - OBJECTIVES: Genome-wide association studies (GWAS) have become increasingly popular to identify associations between single nucleotide polymorphisms (SNPs) and phenotypic traits. The GWAS method is commonly applied within the social sciences. However, statistical analyses will need to be carefully conducted and the use of dedicated genetics software will be required. This tutorial aims to provide a guideline for conducting genetic analyses. METHODS: We discuss and explain key concepts and illustrate how to conduct GWAS using example scripts provided through GitHub (https://github.com/MareesAT/GWA_tutorial/). In addition to the illustration of standard GWAS, we will also show how to apply polygenic risk score (PRS) analysis. PRS does not aim to identify individual SNPs but aggregates information from SNPs across the genome in order to provide individual-level scores of genetic risk. RESULTS: The simulated data and scripts that will be illustrated in the current tutorial provide hands-on practice with genetic analyses. The scripts are based on PLINK, PRSice, and R, which are commonly used, freely available software tools that are accessible for novice users. CONCLUSIONS: By providing theoretical background and hands-on experience, we aim to make GWAS more accessible to researchers without formal training in the field.
+SP  - e1608
+EP  - e1608
+VL  - 27
+IS  - 2
+AN  - 29484742
+UR  - https://pubmed.ncbi.nlm.nih.gov/29484742
+DO  - 10.1002/mpr.1608
+L2  - https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6001694/
+U1  - 29484742[pmid]
+U2  - PMC6001694[pmcid]
+J2  - Int J Methods Psychiatr Res
+JF  - International journal of methods in psychiatric research
+KW  - *GitHub
+KW  - *PLINK
+KW  - *genome-wide association study (GWAS)
+KW  - *polygenic risk score (PRS)
+KW  - *tutorial
+KW  - *Data Interpretation, Statistical
+KW  - Genome-Wide Association Study/*methods
+KW  - *Guidelines as Topic
+KW  - Humans
+KW  - *Multifactorial Inheritance
+KW  - Polymorphism, Single Nucleotide/*genetics
+KW  - *Quality Control
+KW  - Risk Assessment/*methods
+PB  - John Wiley and Sons Inc.
+ER  - 

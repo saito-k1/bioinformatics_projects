@@ -1,0 +1,43 @@
+TY  - JOUR
+DB  - PubMed
+AU  - Marees, Andries T
+AU  - de Kluiver, Hilde
+AU  - Stringer, Sven
+AU  - Vorspan, Florence
+AU  - Curis, Emmanuel
+AU  - Marie-Claire, Cynthia
+AU  - Derks, Eske M
+T1  - A tutorial on conducting genome-wide association studies: Quality control and statistical analysis
+LA  - eng
+SN  - 1557-0657
+SN  - 1049-8931
+Y1  - 2018/06/
+ET  - 2018/02/27
+AB  - OBJECTIVES: Genome-wide association studies (GWAS) have become increasingly popular to identify associations between single nucleotide polymorphisms (SNPs) and phenotypic traits. The GWAS method is commonly applied within the social sciences. However, statistical analyses will need to be carefully conducted and the use of dedicated genetics software will be required. This tutorial aims to provide a guideline for conducting genetic analyses. METHODS: We discuss and explain key concepts and illustrate how to conduct GWAS using example scripts provided through GitHub (https://github.com/MareesAT/GWA_tutorial/). In addition to the illustration of standard GWAS, we will also show how to apply polygenic risk score (PRS) analysis. PRS does not aim to identify individual SNPs but aggregates information from SNPs across the genome in order to provide individual-level scores of genetic risk. RESULTS: The simulated data and scripts that will be illustrated in the current tutorial provide hands-on practice with genetic analyses. The scripts are based on PLINK, PRSice, and R, which are commonly used, freely available software tools that are accessible for novice users. CONCLUSIONS: By providing theoretical background and hands-on experience, we aim to make GWAS more accessible to researchers without formal training in the field.
+SP  - e1608
+EP  - e1608
+VL  - 27
+IS  - 2
+AN  - 29484742
+UR  - https://pubmed.ncbi.nlm.nih.gov/29484742
+DO  - 10.1002/mpr.1608
+L2  - https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6001694/
+U1  - 29484742[pmid]
+U2  - PMC6001694[pmcid]
+J2  - Int J Methods Psychiatr Res
+JF  - International journal of methods in psychiatric research
+KW  - *GitHub
+KW  - *PLINK
+KW  - *genome-wide association study (GWAS)
+KW  - *polygenic risk score (PRS)
+KW  - *tutorial
+KW  - *Data Interpretation, Statistical
+KW  - Genome-Wide Association Study/*methods
+KW  - *Guidelines as Topic
+KW  - Humans
+KW  - *Multifactorial Inheritance
+KW  - Polymorphism, Single Nucleotide/*genetics
+KW  - *Quality Control
+KW  - Risk Assessment/*methods
+PB  - John Wiley and Sons Inc.
+ER  - 

@@ -1,0 +1,242 @@
+---
+author: Kai Saito
+title: "PLINK tutorial"
+  html_document:
+    toc: true
+    toc_depth: 4
+    toc_float: true
+    dev: 'svg'
+  md_document:
+    variant: gfm
+biblography: bibliography.ris
+date: '2022-04-16'
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{bash,include=FALSE}
+# getting started, get basic summary stats about file
+plink --file hapmap1
+```
+
+```{bash,include=FALSE}
+# make a binary PED file 
+plink --file hapmap1 --make-bed --out hapmap1
+# make a binary PED file with high genotyping
+plink --file hapmap1 --make-bed --mind 0.05 --out highgeno
+```
+
+```{bash,include=FALSE}
+# working with the binary PED file
+plink --bfile hapmap1
+```
+
+```{bash,include=FALSE}
+# summary statistics: missing rates
+plink --bfile hapmap1 --missing --out miss_stat
+# take a look at output file
+more miss_stat.lmiss
+# analyse data by chromosome example
+plink --bfile hapmap1 --chr 1 --out res1 --missing
+plink --bfile hapmap1 --chr 2 --out res2 --missing
+```
+
+```{bash,include=FALSE}
+# summary statistics: allele frequencies
+plink --bfile hapmap1 --freq --out freq_stat
+# example stratified analysis
+plink --bfile hapmap1 --freq --within pop.phe --out freq_stat
+# take a look at output
+more freq_stat.frq.strat
+# if interested in a specific SNP
+plink --bfile hapmap1 --snp rs1891905 --freq --within pop.phe --out snp1_frq_stat
+```
+
+```{bash,include=FALSE}
+# perform basic association analysis
+plink --bfile hapmap1 --assoc --out as1
+# can sort list of stats
+sort --key=7 -nr as1.assoc | head
+# get sorted list with range of sig values adjusted for multiple testing
+plink --bfile hapmap1 --assoc --adjust --out as2
+# run iwth alternative phenoype option: inflation factor
+plink --bfile hapmap1 --pheno pop.phe --assoc --adjust --out as3
+```
+
+```{bash,include=FALSE}
+# genotype and other association models
+plink --bfile hapmap1 --model --snp rs2222162 --out mod1
+# also calculate genotypic tests
+plink --bfile hapmap1 --model --cell 0 --snp rs2222162 --out mod2
+```
+
+```{bash,include=FALSE}
+# stratification analysis, perform cluster analysis
+plink --bfile hapmap1 --cluster --mc 2 --ppc 0.05 --out str1
+```
+
+```{bash,include=FALSE}
+# association analysis, accounting for clusters
+plink --bfile hapmap1 --mh --within str1.cluster2 --adjust --out aac1
+more aac1.cmh.adjusted
+# do not impose maximum cluster size
+plink --bfile hapmap1 --cluster --cc --ppc 0.01 --out version2
+# repeat association analysis with alternate clustering scheme
+plink --bfile hapmap1 --mh --within version2.cluster2 --adjust --out aac2
+# specify number of clusters one wants in the final solution
+plink --bfile hapmap1 --cluster --K 2 --out version3
+# use external clustering in analysis
+plink --bfile hapmap1 --mh --within pop.phe --adjust --out aac3
+
+```{bash,include=FALSE}
+# create a visualization of the substructure
+plink --bfile hapmap1 --cluster --matrix --out ibd_view
+```
+
+```{r message=FALSE,warning=FALSE,include=FALSE}
+m <- as.matrix(read.table("ibd_view.mdist"))
+mds <- cmdscale(as.dist(1-m))
+k <- c( rep("green",45) , rep("blue",44) )
+plot(mds,pch=20,col=k)
+```
+
+```{bash,include=FALSE}
+# quantitative trait associate analysis
+plink --bfile hapmap1 --assoc --pheno qt.phe --out quant1
+# use clustered permutation 
+plink --bfile hapmap1 --assoc --pheno qt.phe --perm --within str1.cluster2 --out quant2
+# control for multiple testing
+link --bfile hapmap1 --assoc --pheno qt.phe --mperm 1000 --within str1.cluster2 --out quant3
+# test whether the association w/ continuous phenotype differs between two populations
+plink --bfile hapmap1 --pheno qt.phe --gxe --covar pop.phe --snp rs2222162 --out quant3
+```
+
+```{bash,include=FALSE}
+# extracting a SNP of interest
+plink --bfile hapmap1 --snp rs2222162 --recodeAD --out rec_snp1
+```
+
+```{r message=FALSE,warning=FALSE,include=FALSE}
+d <- read.table("rec_snp1.recode.raw" , header=T)
+summary(glm(PHENOTYPE-1 ~ rs2222162_1, data=d, family="binomial"))
+```
+
+## Results
+Table 1: This table shows simple summary statistics on rates of missing data in the file per SNP after excluding individuals on the basis of low genotyping.
+
+```{r message=FALSE,warning=FALSE,echo=FALSE}
+kable(miss_stat.lmiss)
+```
+
+Table 2: This table shows summary statistics on rates of missing data per individual. For each SNP, we can see the number of missing individuals (N-MISS) and the proportion of individuals missing (F-MISS).
+
+```{r message=FALSE,warning=FALSE,echo=FALSE}
+kable(miss_stat.imiss)
+```
+
+Table 3: This table shows the results of requesting allele frequencies instead of genotyping rates. The table contains the minor allele frequency and allele codes for each SNP. The frequency/missingness analysis is strafied by a categorical cluster variable. Each row is the alle frequency for each SNP strafied by subpopulation. Each SP is represented twice, as the CLST column indicates if the frequency is from the Chinese or the Japanese population. 
+
+```{r message=FALSE,warning=FALSE,echo=FALSE}
+kable(freq_stat.frq.strat)
+```
+
+Table 4: This table shows the basic association analysis on the disease trait for all SNPs. The fields include the chromosome, SNP identifier, code for allele 1, frequency of this variant in cases or controls, code for the other allele, the chi-squared statistic for this test, the asymptotic significance value for this test, and the odds ratio for this test. 
+
+```{r message=FALSE,warning=FALSE,echo=FALSE}
+kable(as1.assoc)
+```
+
+Table 5: This table is similar to table 4, but it contains a sorted list of association results. It includes a range of significance values that are adjusted for multiple testing: this allows us to look at the most significant associations between the variant and disease. In this example, there is no single variant that is significant at the 0.05 level after genome-wide correction. 
+
+```{r message=FALSE,warning=FALSE,echo=FALSE}
+kable(as2.assoc.adjusted)
+```
+
+Table 6: This table shows association statistics based on the 2 by 3 genotype table and the standard allelic test. Additionally, the tests are calculated that assume dominant or recessive action of the minor allele. Additionally, the Cochran-Armitrage trend test is performed on rs22216s. This table does not contain values for the genotypic tests because each table does not have at least 5 observations. The complete table is shown in table 7.
+
+```{r message=FALSE,warning=FALSE,echo=FALSE}
+kable(mod1.model)
+```
+
+Table 7: This table shows the results of a forced genotypic test for SNP rs2222162 in order to obtain association statistics. In this case, the genotypic tests can also be calculated (unlike table 6) because we set the minimum number in each cell to 0. We can now see genotype counts of affected/unaffected individuals. 
+
+```{r message=FALSE,warning=FALSE,echo=FALSE}
+kable(mod2.model)
+```
+
+Table 8:This table represents the results of the stratification analysis, which uses whole genome data to cluster individuals into homogoenous groups. In this particular case, the cluster analysis paired up individuals on the basis of genetic identity. The merge distance p-value contraint is 0.05. 
+
+```{r message=FALSE,warning=FALSE,echo=FALSE}
+kable(str1.cluster1)
+```
+
+Table 9: This table shows the results of the association analysis after accounting for clusters. For this matched analysis, the Cochran-Mantel-Haenszel associatioin statistic was utilized. This test checks for SNP-disease association conditional on the clustering performed previously. We also sorted the SMH association results.
+
+```{r message=FALSE,warning=FALSE,echo=FALSE}
+kable(aac1.cmh.adjusted)
+```
+
+Table 10: This table shows the final solution after performing clustering with fewer constraints. In this case, we did not impose a maximum cluster size, we just ask that each cluster contains  a minimum of1 case and 1 control. In this case, the resulting clusters have separated Chinese/Japanese individuals into different clusters:any two individuals who are different at the 0.01 level are merged.
+
+```{r message=FALSE,warning=FALSE,echo=FALSE}
+kable(version2.cluster1)
+```
+
+Table 11: This table represents a repeat association analysis after the altnernate clustering scheme. The results show that the disease SNP(rs2222162) is genome-wide significant even if we use Bonferroni adjustment for multiple comparisons. 
+
+```{r message=FALSE,warning=FALSE,echo=FALSE}
+kable(aac2.cmh.adjusted)
+```
+
+Table 12: This table shows a third way to perform the stratification analysis: in this case, the number of clusters one wants in the final solution is specified. In this case, we specified two clusters and remove the significance test constraint. We obtained genome-wide significance in this case as well. 
+
+```{r message=FALSE,warning=FALSE,echo=FALSE}
+kable(version3.cluster2)
+```
+
+Table 13: Since the actual ancestry of each individual is known in this sample, we then used external clustering in the analysis. 
+
+```{r message=FALSE,warning=FALSE,echo=FALSE}
+kable(aac3.cmh.adjusted)
+```
+
+Figure 1: Plot of Chinese (green) vs Japanese individuals to show that two distinct clusters exist in the sample.
+
+```{r message=FALSE,warning=FALSE,echo=FALSE}
+plot(mds,pch=20,col=k)
+```
+
+Table 14: In this table, we are performing quantitative trait association analysis: we analyze the quantitative trait directly. The table contains the following fields: chromosome, SNP identifier, number of non-missing individuals for this analysis, regression coefficient, standard error of the coefficient, the regression r-squared (multiple correlation coefficient),t statistic for regression of phenotype on allele count, and the asymptotic value for the coefficient. 
+
+```{r message=FALSE,warning=FALSE,echo=FALSE}
+kable(quant1.qassoc )
+```
+
+Table 15: This table is similar to Table 14 except that the file is now sorted. This table shows that the diseaes variant is significant after genome-wide correction; however, it does not take the clustering into account.
+
+```{r message=FALSE,warning=FALSE,echo=FALSE}
+kable(quant1.qassoc.adjust)
+```
+
+Table 16: In this table, we can see the results of utilizing permutation within cluster. This controls for between-cluster association instead of performing a stratified analysis/including covariates. 
+
+```{r message=FALSE,warning=FALSE,echo=FALSE}
+kable(quant2.qassoc.perm)
+```
+
+Table 17: This table shows the results after testing whether the association with the continuous phenotype differs between the two populations. This table shows the number of non-missing individuals in each category, the regression coefficient, the standard error, the asymptotic significance value, and whether the two regression coefficients are significantly different. In this particular case, the test for interaction of SNP and population interaction is not significant, and we can see the similar effect in both populations in the regression coefficients. 
+
+```{r message=FALSE,warning=FALSE,echo=FALSE}
+kable(quant3.qassoc.gxe)
+```
+
+Table 18: In this table, we show the results of extracting a SNP of interest. First, we convert from the binary PED file to a standard PED format. Then, we extract a single SNP by selecting a region and then we perform a logistic regression to obtain our final result. This result shows that the SNP of interest is significantly related to the disease. 
+
+```{r message=FALSE,warning=FALSE,echo=FALSE}
+summary(glm(PHENOTYPE-1 ~ rs2222162_A, data=d, family="binomial"))
+```
+
+## References
+

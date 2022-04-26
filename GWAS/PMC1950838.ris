@@ -1,0 +1,41 @@
+TY  - JOUR
+DB  - PubMed
+AU  - Purcell, Shaun
+AU  - Neale, Benjamin
+AU  - Todd-Brown, Kathe
+AU  - Thomas, Lori
+AU  - Ferreira, Manuel A R
+AU  - Bender, David
+AU  - Maller, Julian
+AU  - Sklar, Pamela
+AU  - de Bakker, Paul I W
+AU  - Daly, Mark J
+AU  - Sham, Pak C
+T1  - PLINK: a tool set for whole-genome association and population-based linkage analyses
+LA  - eng
+SN  - 0002-9297
+SN  - 1537-6605
+Y1  - 2007/09/
+ET  - 2007/07/25
+AB  - Whole-genome association studies (WGAS) bring new computational, as well as analytic, challenges to researchers. Many existing genetic-analysis tools are not designed to handle such large data sets in a convenient manner and do not necessarily exploit the new opportunities that whole-genome data bring. To address these issues, we developed PLINK, an open-source C/C++ WGAS tool set. With PLINK, large data sets comprising hundreds of thousands of markers genotyped for thousands of individuals can be rapidly manipulated and analyzed in their entirety. As well as providing tools to make the basic analytic steps computationally efficient, PLINK also supports some novel approaches to whole-genome data that take advantage of whole-genome coverage. We introduce PLINK and describe the five main domains of function: data management, summary statistics, population stratification, association analysis, and identity-by-descent estimation. In particular, we focus on the estimation and use of identity-by-state and identity-by-descent information in the context of population-based whole-genome studies. This information can be used to detect and correct for population stratification and to identify extended chromosomal segments that are shared identical by descent between very distantly related individuals. Analysis of the patterns of segmental sharing has the potential to map disease loci that contain multiple rare variants in a population-based linkage analysis.
+SP  - 559
+EP  - 575
+VL  - 81
+IS  - 3
+AN  - 17701901
+UR  - https://pubmed.ncbi.nlm.nih.gov/17701901
+DO  - 10.1086/519795
+L2  - https://www.ncbi.nlm.nih.gov/pmc/articles/PMC1950838/
+U1  - 17701901[pmid]
+U2  - PMC1950838[pmcid]
+U4  - S0002-9297(07)61352-4[PII]
+J2  - Am J Hum Genet
+JF  - American journal of human genetics
+KW  - Genetic Linkage/*genetics
+KW  - Genome, Human/*genetics
+KW  - Humans
+KW  - Polymorphism, Single Nucleotide
+KW  - Population/*genetics
+KW  - *Software
+PB  - The American Society of Human Genetics
+ER  - 
