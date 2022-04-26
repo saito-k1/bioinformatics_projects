@@ -1,3 +1,3 @@
 # bioinformatics_projects
-# Kai Saito
+## Kai Saito
 Coding completed from bioinformatics coursework
